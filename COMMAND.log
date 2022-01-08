@@ -24,6 +24,20 @@ docker exec -it python python publish/new_task.py 3rd msg...
 docker exec -it python python publish/new_task.py 4th msg....
 docker exec -it python python publish/new_task.py fifth msg.....
 
+v@k8s-master03:~$ docker exec rabbitmq rabbitmqctl delete_queue task_queue
+Deleting queue 'task_queue' on vhost '/' ...
+Queue was successfully deleted with 0 messages
+v@k8s-master03:~$ watch -d -n 6 docker exec rabbitmq rabbitmqctl list_queues name messages_ready messages_unacknowledged
+
+Every 6.0s: docker exec rabbitmq rabbitmqctl list_queues name messages_ready messages_unackn...  k8s-master03: Sat Jan  8 19:44:26 2022
+
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name    messages_ready  messages_unacknowledged
+hello   0       0
+task_queue      0       25
+
+
 
 
 
